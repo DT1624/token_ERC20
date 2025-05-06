@@ -2,7 +2,7 @@
 
 ## Overview
 
-
+This is a blockchain-based system designed to allow users to create and manage tokens following the ERC-20 standard. The system includes administrative controls and supports token creation with optional fees. Users can utilize these tokens within the system's ecosystem for various purposes.
 
 ## Features
 
