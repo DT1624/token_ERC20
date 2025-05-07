@@ -4,12 +4,15 @@ version = "1.0.0"
 authors = []
 
 [addresses]
+owner = '807d4aa3f714d9f7e2196c563666997ccb69f43b1f725f5686ad76e22dbfaff3'
+admin = '5147bf5d6965467a7985a90d049f353903153b5b82e30d88068d9301dc50265e'
+user = 'ac0a1dc3947c598c60a91ae03ba8d916bc575123cb3aac188fd2f4b64f341d56'
 
 [dev-addresses]
 
 [dependencies.AptosFramework]
-git = "https://github.com/aptos-labs/aptos-core.git"
-rev = "mainnet"
+git = "https://github.com/movementlabsxyz/aptos-core.git"
+rev = "movement"
 subdir = "aptos-move/framework/aptos-framework"
 
 [dev-dependencies]

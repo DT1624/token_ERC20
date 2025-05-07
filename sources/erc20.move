@@ -154,7 +154,7 @@ module owner::erc20 {
         });
     }
 
-    public entry fun set_pause_creator(admin: &signer, account: address, paused: bool) acquires TokenManager {
+    public entry fun set_pause_creator_token(admin: &signer, account: address, paused: bool) acquires TokenManager {
         let token_manager: &mut TokenManager = borrow_global_mut<TokenManager>(CONTRACT_ADDRESS);
         assert!(signer::address_of(admin) == token_manager.admin, E_NOT_ADMIN);
         assert!(smart_table::contains(&token_manager.user_infos, account), E_ACCOUNT_HAS_NO_TOKENS);
@@ -357,7 +357,7 @@ module owner::erc20 {
         token_manager.paused
     }
 
-    public fun is_creator_paused(account: address): bool acquires TokenManager {
+    public fun is_creator_token_paused(account: address): bool acquires TokenManager {
         let token_manager: &TokenManager = borrow_global<TokenManager>(CONTRACT_ADDRESS);
         assert!(smart_table::contains(&token_manager.user_infos, account), E_ACCOUNT_HAS_NO_TOKENS);
         smart_table::borrow(&token_manager.user_infos, account).paused
@@ -378,6 +378,14 @@ module owner::erc20 {
         if (option::is_none(&supply)) {
             0
         } else (option::extract(&mut supply) as u64)
+    }
+
+    public fun get_new_token_address_and_metadata(): (address, Object<Metadata>) acquires TokenManager {
+        let token_manager: &TokenManager = borrow_global<TokenManager>(CONTRACT_ADDRESS);
+        let last_idx = vector::length(&token_manager.tokens_list) - 1;
+        let token_address: address = *vector::borrow(&token_manager.tokens_list, last_idx);
+        let token_metadata: Object<Metadata> = object::address_to_object<Metadata>(token_address);
+        (token_address, token_metadata)
     }
 
     public fun get_owned_token(account: address): vector<address> acquires TokenManager {
